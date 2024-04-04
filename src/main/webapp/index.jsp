@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Universitas</title>
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="estilos/style.css">
 </head>
 <body>
 <div class="principal">
@@ -29,7 +29,7 @@
     </header>
     <nav>
         <ul>
-            <li>UNO</li>
+            <li>Rutas entre bloques</li>
             <li>DOS</li>
             <li>TRES</li>
             <li>CUATRO</li>
@@ -87,4 +87,5 @@
 
 
 </body>
+
 </html>
