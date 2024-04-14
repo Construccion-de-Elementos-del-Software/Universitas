@@ -33,7 +33,7 @@ public class ConexionMysql {
         }
     }
 
-    public void getUsers() throws SQLException {
+    public void getUsers()  {
         String sql = "SELECT * FROM USERS";
         try {
             createConexion();
@@ -52,7 +52,11 @@ public class ConexionMysql {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
-            cnn.close();
+            try {
+                cnn.close();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
 
     }
