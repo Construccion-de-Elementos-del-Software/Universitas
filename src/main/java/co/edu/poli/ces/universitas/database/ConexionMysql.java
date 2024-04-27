@@ -1,6 +1,10 @@
 package co.edu.poli.ces.universitas.database;
 
+import co.edu.poli.ces.universitas.dao.User;
+
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ConexionMysql {
     // Importante: Tener XAMM, una aplicación que empaqueta varios servicios
@@ -14,7 +18,7 @@ public class ConexionMysql {
     private String nameDatabase;
     private Connection cnn;
 
-    ConexionMysql (){
+    public ConexionMysql(){
         user = "root";
         password = "";
         port = 3306;
@@ -22,7 +26,7 @@ public class ConexionMysql {
         nameDatabase = "universitas";
     }
 
-    public void createConexion(){
+    private void createConexion(){
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             cnn = DriverManager.getConnection("jdbc:mysql://"+host+":"+port+"/"+nameDatabase, user, password);
@@ -33,22 +37,22 @@ public class ConexionMysql {
         }
     }
 
-    public void getUsers()  {
+    public List<User> getUsers()  {
         String sql = "SELECT * FROM USERS";
+
+        // Polimorfismo
+        List<User> users = new ArrayList<>();
         try {
             createConexion();
             Statement stmt = cnn.createStatement();
             ResultSet result = stmt.executeQuery(sql);
 
             while (result.next()){
-                System.out.println("***************************");
-                System.out.println("ID: "+result.getInt(1));
-                System.out.println("Name: "+result.getString(2));
-                System.out.println("Lastname: "+result.getString("lastName"));
-                System.out.println("****************************");
+                users.add(new User(result.getString("name"),result.getString("lastName") ));
             }
             stmt.close();
             result.close();
+            return users;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
