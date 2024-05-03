@@ -48,7 +48,7 @@ public class ConexionMysql {
             ResultSet result = stmt.executeQuery(sql);
 
             while (result.next()){
-                users.add(new User(result.getString("name"),result.getString("lastName") ));
+                users.add(new User(result.getInt("id"),result.getString("name"),result.getString("lastName"),result.getString("mail"),result.getString("password"),result.getDate("createdAt"),result.getDate("updatedAt"),result.getDate("deletedAt")));
             }
             stmt.close();
             result.close();

@@ -71,7 +71,16 @@ public class UserServlet extends HttpServlet {
         * */
         resp.setContentType("application/json");
         PrintWriter out = resp.getWriter();
-        out.print(gson.toJson(cnn.getUsers()));
+        List<User> listUsers = cnn.getUsers();
+        if (req.getParameter("id") == null){
+            out.print(gson.toJson(listUsers));
+        } else {
+            for (User user : listUsers) {
+                if (user.getId() == ( Integer.parseInt(req.getParameter("id")))) {
+                    out.print(gson.toJson(user));
+                }
+            }
+        }
         out.flush();
     }
 }
