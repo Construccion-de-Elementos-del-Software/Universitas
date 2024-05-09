@@ -18,7 +18,7 @@ import java.util.List;
 
 
 @WebServlet(name = "userServlet", value = "/user")
-public class UserServlet extends HttpServlet {
+public class UserServlet extends MyServlet {
 
     private ConexionMysql cnn;
     //JSON
@@ -71,16 +71,19 @@ public class UserServlet extends HttpServlet {
         * */
         resp.setContentType("application/json");
         PrintWriter out = resp.getWriter();
-        List<User> listUsers = cnn.getUsers();
         if (req.getParameter("id") == null){
+            List<User> listUsers = cnn.getUsers();
             out.print(gson.toJson(listUsers));
         } else {
-            for (User user : listUsers) {
-                if (user.getId() == ( Integer.parseInt(req.getParameter("id")))) {
-                    out.print(gson.toJson(user));
-                }
-            }
+            User usuario = cnn.getUsers(Integer.parseInt(req.getParameter("id")));
+            out.print(gson.toJson(usuario));
         }
         out.flush();
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("application/json");
+
     }
 }

@@ -136,13 +136,50 @@ public class ConexionMysql {
         }
 
     }
-    public static void main(String[] args) {
-        ConexionMysql conection = new ConexionMysql();
-        conection.getUsers();
-        //conection.createUser("jhoana","torres aguirre","jhoana@gmail.com","1234");
-        //conection.updateUser("Jhoana","Torres Aguirre","jhoana@gmail.com","jhoa");
-        //.deleteUser("jhoana@gmail.com");
-    }
+
+
+    public User getUsers(int id) {
+        /*String sql = "SELECT * FROM USERS WHERE ID = " + id;
+        try{
+            createConexion();
+            Statement stm = cnn.createStatement();
+            ResultSet result = stm.executeQuery(sql);
+            if (result.next()){
+                return new User(result.getInt("id"),result.getString("name"),result.getString("lastName"),result.getString("mail"),result.getString("password"),result.getDate("createdAt"),result.getDate("updatedAt"),result.getDate("deletedAt"));
+            }
+            return null;
+
+        } catch (Exception e){
+            throw new RuntimeException(e);
+        } finally {
+            try{
+                if (cnn != null)
+                    cnn.close();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }*/
+        String sql = "SELECT * FROM USERS WHERE ID = ?";
+        try{
+            createConexion();
+            PreparedStatement pst = cnn.prepareStatement();
+            pst.setInt(1,id);
+            ResultSet result = pst.executeQuery();
+            if (result.next()){
+                return new User(result.getInt("id"),result.getString("name"),result.getString("lastName"),result.getString("mail"),result.getString("password"),result.getDate("createdAt"),result.getDate("updatedAt"),result.getDate("deletedAt"));
+            }
+            return null;
+
+        } catch (Exception e){
+            throw new RuntimeException(e);
+        } finally {
+            try{
+                if (cnn != null)
+                    cnn.close();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
 
 
 
