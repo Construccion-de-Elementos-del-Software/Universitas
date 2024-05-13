@@ -65,18 +65,22 @@ public class ConexionMysql {
 
     }
 
-    public void createUser(String name, String lastName, String mail,String password){
+    public int createUser(String name, String lastName, String mail,String password){
         String sql = "INSERT INTO USERS(name, lastName, mail, password) VALUES (?,?,?,?)";
+        int id = 0;
         createConexion();
         try {
-            PreparedStatement psmt = cnn.prepareStatement(sql);
+            PreparedStatement psmt = cnn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
             psmt.setString(1,name);
             psmt.setString(2, lastName);
             psmt.setString(3,mail);
             psmt.setString(4, password);
 
             psmt.executeUpdate();
-
+            ResultSet resultSet = psmt.getGeneratedKeys();
+            if (resultSet.next()) {
+                id = resultSet.getInt(1);
+            }
             System.out.println("User " +name+" has been created.");
 
             psmt.close();
@@ -89,6 +93,8 @@ public class ConexionMysql {
                 throw new RuntimeException(e);
             }
         }
+
+        return id;
 
     }
 
@@ -160,20 +166,43 @@ public class ConexionMysql {
             }
         }*/
         String sql = "SELECT * FROM USERS WHERE ID = ?";
-        try{
+        try {
             createConexion();
-            PreparedStatement pst = cnn.prepareStatement();
-            pst.setInt(1,id);
+            PreparedStatement pst = cnn.prepareStatement(sql);
+            pst.setInt(1, id);
             ResultSet result = pst.executeQuery();
-            if (result.next()){
-                return new User(result.getInt("id"),result.getString("name"),result.getString("lastName"),result.getString("mail"),result.getString("password"),result.getDate("createdAt"),result.getDate("updatedAt"),result.getDate("deletedAt"));
+            if (result.next()) {
+                return new User(result.getInt("id"), result.getString("name"), result.getString("lastName"), result.getString("mail"), result.getString("password"), result.getDate("createdAt"), result.getDate("updatedAt"), result.getDate("deletedAt"));
             }
             return null;
 
-        } catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException(e);
         } finally {
-            try{
+            try {
+                if (cnn != null)
+                    cnn.close();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    public User getUserByMail(String mail) {
+        String sql = "SELECT * FROM USERS WHERE mail = ?";
+        User user = null;
+        try {
+            createConexion();
+            PreparedStatement pst = cnn.prepareStatement(sql);
+            pst.setString(1, mail);
+            ResultSet result = pst.executeQuery();
+            if (result.next()) {
+                user = new User(result.getInt("id"), result.getString("name"), result.getString("lastName"), result.getString("mail"), result.getString("password"), result.getDate("createdAt"), result.getDate("updatedAt"), result.getDate("deletedAt"));
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
                 if (cnn != null)
                     cnn.close();
             } catch (SQLException e) {
@@ -181,6 +210,6 @@ public class ConexionMysql {
             }
         }
 
-
-
+        return user;
+    }
 }
