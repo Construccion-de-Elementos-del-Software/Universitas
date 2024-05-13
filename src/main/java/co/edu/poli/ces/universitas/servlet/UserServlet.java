@@ -29,48 +29,12 @@ public class UserServlet extends MyServlet {
 
     public void init()  {
         cnn = new ConexionMysql();
-        System.out.println("Inicia servlet de estudiante");
-        // JSON
         gsonBuilder = new GsonBuilder();
         gson = gsonBuilder.create();
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // REQ todo lo que envio desde el cliente
-        // RES me permite responder al cliente
-        /* SIN JSON
-        resp.setContentType("text/html");
-        PrintWriter out = resp.getWriter();
-        out.print("Hola desde el servlet de estudiantes");
-        out.print( "<b>DNI: </b>" + req.getParameter("dni"));
-
-        List<User> listUsers = cnn.getUsers();
-        out.print("<table>" +
-                "<thead>" +
-                "<tr>" +
-                "<th>Nombre</th>"+
-                "<th>Apellidos</th>"+
-                "</tr>" +
-                "</thead>" +
-                "<tbody>");
-
-        for (User u: listUsers){
-            out.print("<tr>" +
-                    "<td>" + u.getName() +
-                                    "</td>"+
-                            "<td>" + u.getLastName() +
-                            "</td>" +
-                            "</tr>");
-        }
-        out.print(
-                "</tbody>" +
-                "</table>");
-        */
-
-        /*COM JSON
-           Tener la dependencia GSON
-        * */
         resp.setContentType("application/json");
         PrintWriter out = resp.getWriter();
         if (req.getParameter("id") == null){
@@ -98,6 +62,7 @@ public class UserServlet extends MyServlet {
               resp.setStatus(200);
               out.print(gson.toJson(user));
           } else {
+              // MD5 password with a dependency: commons-codec
               String md5Password = DigestUtils.md5Hex(body.get("password").getAsString());
               int id  = cnn.createUser(body.get("name").getAsString(),body.get("lastName").getAsString(),body.get("mail").getAsString(),md5Password);
               if (id != 0){

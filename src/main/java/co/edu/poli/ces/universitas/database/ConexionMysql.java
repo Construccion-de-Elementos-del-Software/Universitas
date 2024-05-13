@@ -7,9 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ConexionMysql {
-    // Importante: Tener XAMM, una aplicación que empaqueta varios servicios
-    // Con phpMyAdmin puedo administrar las bases de datos
-
     private String user;
     private String password;
     private int port;
@@ -40,7 +37,6 @@ public class ConexionMysql {
     public List<User> getUsers()  {
         String sql = "SELECT * FROM USERS";
 
-        // Polimorfismo
         List<User> users = new ArrayList<>();
         try {
             createConexion();
@@ -82,7 +78,6 @@ public class ConexionMysql {
                 id = resultSet.getInt(1);
             }
             System.out.println("User " +name+" has been created.");
-
             psmt.close();
         } catch (SQLException e) {
             System.out.println("Error "+e.getErrorCode()+ " " +e.getMessage());
@@ -145,26 +140,6 @@ public class ConexionMysql {
 
 
     public User getUsers(int id) {
-        /*String sql = "SELECT * FROM USERS WHERE ID = " + id;
-        try{
-            createConexion();
-            Statement stm = cnn.createStatement();
-            ResultSet result = stm.executeQuery(sql);
-            if (result.next()){
-                return new User(result.getInt("id"),result.getString("name"),result.getString("lastName"),result.getString("mail"),result.getString("password"),result.getDate("createdAt"),result.getDate("updatedAt"),result.getDate("deletedAt"));
-            }
-            return null;
-
-        } catch (Exception e){
-            throw new RuntimeException(e);
-        } finally {
-            try{
-                if (cnn != null)
-                    cnn.close();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-        }*/
         String sql = "SELECT * FROM USERS WHERE ID = ?";
         try {
             createConexion();
