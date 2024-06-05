@@ -23,7 +23,7 @@ public class ConexionMysql {
         nameDatabase = "universitas";
     }
 
-    private void createConexion(){
+    protected void createConexion(){
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             cnn = DriverManager.getConnection("jdbc:mysql://"+host+":"+port+"/"+nameDatabase, user, password);
@@ -186,5 +186,10 @@ public class ConexionMysql {
         }
 
         return user;
+    }
+
+
+    public Connection getCnn(){
+        return this.cnn;
     }
 }

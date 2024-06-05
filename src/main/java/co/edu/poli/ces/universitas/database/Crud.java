@@ -8,4 +8,6 @@ public interface Crud {
     public void insert(User user);
     public void update(User user);
     public List<User> get();
+
+    public User get(int id);
 }
