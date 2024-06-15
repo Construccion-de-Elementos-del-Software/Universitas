@@ -3,8 +3,12 @@ package co.edu.poli.ces.universitas.servlet;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 
@@ -20,5 +24,26 @@ public abstract class MyServlet extends HttpServlet {
         reader.close();
 
         return JsonParser.parseString(sb.toString()).getAsJsonObject();
+    }
+
+    @Override
+    public void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+        String method = req.getMethod();
+        if (method.equals("PATCH")){
+            this.doPatch(req,res);
+        }else {
+            super.service(req, res);
+        }
+
+    }
+
+    protected void doPatch(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String protocol = req.getProtocol();
+        String msg = "mensaje";
+        if (protocol.endsWith("1.1")) {
+            resp.sendError(405, msg);
+        } else {
+            resp.sendError(400, msg);
+        }
     }
 }
