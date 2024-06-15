@@ -10,7 +10,7 @@ import java.io.IOException;
 public class ConexionFirebase {
     public ConexionFirebase() {
         try {
-            FileInputStream serviceAccount = new FileInputStream("src/main/resources/serviceAccountKey.json");
+            FileInputStream serviceAccount = new FileInputStream("C:\\Users\\Santiago Torres\\Desktop\\CES3\\Clase1\\universitas\\src\\main\\resources\\serviceAccountKey.json");
             FirebaseOptions options = new FirebaseOptions.Builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount))
                     .build();

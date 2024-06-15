@@ -8,7 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserRepository extends ConexionMysql implements Crud<User> {
+public class UserRepository extends ConexionMysql implements Crud<User,Integer> {
 
 
     @Override
@@ -17,8 +17,8 @@ public class UserRepository extends ConexionMysql implements Crud<User> {
     }
 
     @Override
-    public void update(User user) {
-
+    public boolean update(User user) {
+        return false;
     }
 
     @Override
@@ -49,7 +49,7 @@ public class UserRepository extends ConexionMysql implements Crud<User> {
     }
 
     @Override
-    public User getOne(int id) {
+    public User getOne(Integer id) {
         String sql = "SELECT * FROM USERS WHERE ID = ?";
         try {
             createConexion();

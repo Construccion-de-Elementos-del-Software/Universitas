@@ -11,7 +11,7 @@ import com.google.firebase.cloud.FirestoreClient;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 
-public class TaskRepository extends ConexionFirebase implements Crud<Task> {
+public class TaskRepository extends ConexionFirebase implements Crud<Task,String> {
 
 
     @Override
@@ -38,8 +38,8 @@ public class TaskRepository extends ConexionFirebase implements Crud<Task> {
     }
 
     @Override
-    public void update(Task user) {
-
+    public boolean update(Task user) {
+        return false;
     }
 
     @Override
@@ -62,7 +62,7 @@ public class TaskRepository extends ConexionFirebase implements Crud<Task> {
     }
 
     @Override
-    public Task getOne(int id) {
+    public Task getOne(String id) {
         Firestore db = FirestoreClient.getFirestore();
         DocumentReference docRef = db.collection("tasks").document(String.valueOf(id));
         return null;
