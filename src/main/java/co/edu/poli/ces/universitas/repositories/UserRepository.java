@@ -12,18 +12,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserRepository extends ConexionMysql implements Crud {
+
+
     @Override
-    public void insert(User user) {
+    public void insert(Object user) {
 
     }
 
     @Override
-    public void update(User user) {
+    public void update(Object user) {
 
     }
 
     @Override
-    public List<User> get() {
+    public List get() {
         String sql = "SELECT * FROM USERS";
 
         List<User> users = new ArrayList<>();
@@ -50,7 +52,7 @@ public class UserRepository extends ConexionMysql implements Crud {
     }
 
     @Override
-    public User get(int id) {
+    public Object getOne(int id) {
         String sql = "SELECT * FROM USERS WHERE ID = ?";
         try {
             createConexion();
@@ -73,4 +75,6 @@ public class UserRepository extends ConexionMysql implements Crud {
             }
         }
     }
+
+
 }

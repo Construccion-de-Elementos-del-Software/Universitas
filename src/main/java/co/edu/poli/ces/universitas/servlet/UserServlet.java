@@ -48,6 +48,11 @@ public class UserServlet extends MyServlet {
         out.flush();
     }
 
+    @Override
+    protected void doPatch(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        super.doPatch(req, resp);
+    }
+
     /*
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
