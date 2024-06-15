@@ -4,23 +4,20 @@ import co.edu.poli.ces.universitas.dao.User;
 import co.edu.poli.ces.universitas.database.ConexionMysql;
 import co.edu.poli.ces.universitas.database.Crud;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserRepository extends ConexionMysql implements Crud {
+public class UserRepository extends ConexionMysql implements Crud<User> {
 
 
     @Override
-    public void insert(Object user) {
+    public void insert(User user) {
 
     }
 
     @Override
-    public void update(Object user) {
+    public void update(User user) {
 
     }
 
@@ -52,7 +49,7 @@ public class UserRepository extends ConexionMysql implements Crud {
     }
 
     @Override
-    public Object getOne(int id) {
+    public User getOne(int id) {
         String sql = "SELECT * FROM USERS WHERE ID = ?";
         try {
             createConexion();

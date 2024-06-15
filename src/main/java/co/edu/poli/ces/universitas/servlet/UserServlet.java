@@ -39,10 +39,10 @@ public class UserServlet extends MyServlet {
         resp.setContentType("application/json");
         PrintWriter out = resp.getWriter();
         if (req.getParameter("id") == null){
-            List<User> listUsers = repository.getUsers();
+            List<User> listUsers = repository.get();
             out.print(gson.toJson(listUsers));
         } else {
-            User usuario = repository.getUsers(Integer.parseInt(req.getParameter("id")));
+            User usuario = repository.getOne(Integer.parseInt(req.getParameter("id")));
             out.print(gson.toJson(usuario));
         }
         out.flush();
