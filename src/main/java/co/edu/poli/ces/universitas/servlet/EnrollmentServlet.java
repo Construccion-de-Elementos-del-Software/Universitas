@@ -2,9 +2,7 @@ package co.edu.poli.ces.universitas.servlet;
 
 
 import co.edu.poli.ces.universitas.dao.Enrollment;
-import co.edu.poli.ces.universitas.repositories.CommentRepository;
 import co.edu.poli.ces.universitas.repositories.EnrollmentRepository;
-import co.edu.poli.ces.universitas.repositories.StudentRepository;
 import com.google.gson.*;
 
 import javax.servlet.annotation.WebServlet;
@@ -14,7 +12,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 @WebServlet(name = "enrollmentsServlet", value = "/enrollments")
-public class RegistrationServlet extends MyServlet {
+public class EnrollmentServlet extends MyServlet {
     private EnrollmentRepository repository;
     private GsonBuilder gsonBuilder;
     private Gson gson;

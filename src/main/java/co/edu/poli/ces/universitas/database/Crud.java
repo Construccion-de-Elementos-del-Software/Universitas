@@ -1,7 +1,5 @@
 package co.edu.poli.ces.universitas.database;
 
-import co.edu.poli.ces.universitas.dao.User;
-
 import java.util.List;
 
 public interface Crud<E,T> {

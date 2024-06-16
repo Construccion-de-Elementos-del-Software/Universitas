@@ -12,25 +12,12 @@ public class Comment {
     private String comment_text;
     private ArrayList<Reply> replies;
 
-    public Comment() {
-    }
-
     public Comment(String mail, String fullName, Date createdAt, TypesComment type, String comment_text) {
         this.mail = mail;
         this.fullName = fullName;
         this.createdAt = createdAt;
         this.type = type;
         this.comment_text = comment_text;
-    }
-
-    public Comment(String document, String mail, String fullName, Date createdAt, TypesComment type, String comment_text, ArrayList<Reply> replies) {
-        this.document = document;
-        this.mail = mail;
-        this.fullName = fullName;
-        this.createdAt = createdAt;
-        this.type = type;
-        this.comment_text = comment_text;
-        this.replies = replies;
     }
 
     public String getDocument() {

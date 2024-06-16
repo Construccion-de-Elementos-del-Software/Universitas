@@ -1,10 +1,6 @@
 package co.edu.poli.ces.universitas.database;
 
-import co.edu.poli.ces.universitas.dao.User;
-
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ConexionMysql {
     private String user;

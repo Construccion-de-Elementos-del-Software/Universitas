@@ -2,12 +2,9 @@ package co.edu.poli.ces.universitas.repositories;
 
 import co.edu.poli.ces.universitas.dao.Comment;
 import co.edu.poli.ces.universitas.dao.Reply;
-import co.edu.poli.ces.universitas.dao.Task;
-import co.edu.poli.ces.universitas.dao.TypesComment;
 import co.edu.poli.ces.universitas.database.ConexionFirebase;
 import co.edu.poli.ces.universitas.database.Crud;
 import com.google.api.core.ApiFuture;
-import com.google.cloud.Timestamp;
 import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
 

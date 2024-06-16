@@ -2,7 +2,6 @@ package co.edu.poli.ces.universitas.repositories;
 
 
 import co.edu.poli.ces.universitas.dao.Student;
-import co.edu.poli.ces.universitas.dao.User;
 import co.edu.poli.ces.universitas.database.ConexionMysql;
 import co.edu.poli.ces.universitas.database.Crud;
 

@@ -4,7 +4,6 @@ package co.edu.poli.ces.universitas.servlet;
 import co.edu.poli.ces.universitas.dao.*;
 import co.edu.poli.ces.universitas.repositories.CommentRepository;
 import co.edu.poli.ces.universitas.repositories.StudentRepository;
-import co.edu.poli.ces.universitas.repositories.UserRepository;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
@@ -17,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
-import java.util.List;
 
 @WebServlet(name = "commentServlet", value = "/comment")
 public class CommentServlet extends MyServlet{
