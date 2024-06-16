@@ -1,5 +1,6 @@
 package co.edu.poli.ces.universitas.servlet;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -24,6 +25,19 @@ public abstract class MyServlet extends HttpServlet {
         reader.close();
 
         return JsonParser.parseString(sb.toString()).getAsJsonObject();
+    }
+
+    public JsonArray getJsonArrayFromPost(HttpServletRequest request) throws IOException {
+        BufferedReader reader = request.getReader();
+        StringBuilder sb = new StringBuilder();
+        String line = reader.readLine();
+        while (line != null) {
+            sb.append(line).append("\n");
+            line = reader.readLine();
+        }
+        reader.close();
+
+        return JsonParser.parseString(sb.toString()).getAsJsonArray();
     }
 
     @Override

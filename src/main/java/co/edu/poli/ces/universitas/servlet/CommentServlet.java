@@ -19,7 +19,7 @@ import java.io.PrintWriter;
 import java.util.Date;
 import java.util.List;
 
-@WebServlet(name = "userServlet", value = "/comment")
+@WebServlet(name = "commentServlet", value = "/comment")
 public class CommentServlet extends MyServlet{
     private CommentRepository repository;
     private StudentRepository repositoryStudent;
