@@ -10,14 +10,16 @@ public class Comment {
     private Date createdAt;
     private TypesComment type;
     private String comment_text;
+    private int student_id;
     private ArrayList<Reply> replies;
 
-    public Comment(String mail, String fullName, Date createdAt, TypesComment type, String comment_text) {
+    public Comment(String mail, String fullName, Date createdAt, TypesComment type, String comment_text, int student_id) {
         this.mail = mail;
         this.fullName = fullName;
         this.createdAt = createdAt;
         this.type = type;
         this.comment_text = comment_text;
+        this.student_id = student_id;
     }
 
     public String getDocument() {
@@ -34,6 +36,14 @@ public class Comment {
 
     public void setMail(String mail) {
         this.mail = mail;
+    }
+
+    public int getStudent_id() {
+        return student_id;
+    }
+
+    public void setStudent_id(int student_id) {
+        this.student_id = student_id;
     }
 
     public String getFullName() {

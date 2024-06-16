@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
 
-@WebServlet(name = "commentServlet", value = "/comment")
+@WebServlet(name = "commentServlet", value = "/comments")
 public class CommentServlet extends MyServlet{
     private CommentRepository repository;
     private StudentRepository repositoryStudent;
@@ -52,15 +52,15 @@ public class CommentServlet extends MyServlet{
             if (student != null){
                 JsonElement typeComment = body.get("type");
                 if (TypesComment.valueOf(typeComment.getAsString()) == TypesComment.COMMENT){
-                    repository.insert(new Comment(body.get("mail").getAsString(),body.get("fullName").getAsString(),new Date(),TypesComment.valueOf(typeComment.getAsString()),body.get("comment_text").getAsString()));
+                    repository.insert(new Comment(body.get("mail").getAsString(),body.get("fullName").getAsString(),new Date(),TypesComment.valueOf(typeComment.getAsString()),body.get("comment_text").getAsString(),student.getId()));
                     resp.setStatus(201);
                     out.print(gson.toJson("Comentario creado."));
                 } else if (TypesComment.valueOf(typeComment.getAsString()) == TypesComment.REPLY){
                     if (body.get("documentComment")==null){
                         resp.setStatus(400);
-                        out.print(gson.toJson("Como es una respuesta a un comentario, necesitamos el documento del comentario."));
+                        out.print(gson.toJson("Como es una respuesta a un comentario, necesitamos el documento del comentario (documentComment)."));
                     } else {
-                        boolean respt = repository.insertReply(body.get("documentComment").getAsString(),new Reply(body.get("mail").getAsString(),body.get("fullName").getAsString(),new Date(),TypesComment.valueOf(typeComment.getAsString()),body.get("comment_text").getAsString()));
+                        boolean respt = repository.insertReply(body.get("documentComment").getAsString(),new Reply(body.get("mail").getAsString(),body.get("fullName").getAsString(),new Date(),TypesComment.valueOf(typeComment.getAsString()),body.get("comment_text").getAsString(),student.getId()));
                         if (respt){
                             resp.setStatus(201);
                             out.print(gson.toJson("Se ha hecho una replica al comentario."));

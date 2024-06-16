@@ -25,6 +25,7 @@ public class CommentRepository extends ConexionFirebase implements Crud<Comment,
         Map<String, Object> data = new HashMap<>();
 
         data.put("mail",comment.getMail());
+        data.put("student_id",comment.getStudent_id());
         data.put("fullName", comment.getFullName());
         data.put("type",comment.getType());
         data.put("createdAt", new Date());
